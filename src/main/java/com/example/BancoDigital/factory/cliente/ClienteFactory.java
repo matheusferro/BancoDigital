@@ -1,6 +1,5 @@
 package com.example.BancoDigital.factory.cliente;
 
-import com.example.BancoDigital.dto.ClienteDAO;
 import com.example.BancoDigital.model.Cliente;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +13,7 @@ public class ClienteFactory implements ClienteDAO {
 
     @Override
     public int save(Cliente cliente) {
-        DB.add(new Cliente(cliente.getNome(), cliente.getSobrenome(), cliente.getEmail(), cliente.getCnh(), cliente.getDtNasc()));
+        DB.add(new Cliente(cliente.getNome(), cliente.getSobrenome(), cliente.getCpf(), cliente.getEmail(), cliente.getCnh(), cliente.getDtNasc()));
         return 1;
     }
 
