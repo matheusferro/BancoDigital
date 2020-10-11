@@ -1,4 +1,4 @@
-package com.example.BancoDigital.dto;
+package com.example.BancoDigital.factory.cliente;
 
 import com.example.BancoDigital.model.Cliente;
 
