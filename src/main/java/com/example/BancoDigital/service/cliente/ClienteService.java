@@ -1,16 +1,20 @@
 package com.example.BancoDigital.service.cliente;
 
+import com.example.BancoDigital.Utils.Validacao;
+import com.example.BancoDigital.dto.model.ClienteDTO;
 import com.example.BancoDigital.model.Cliente;
 import com.example.BancoDigital.repository.cliente.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Service
-public class ClienteService {
+public class ClienteService implements ClienteInterface {
 //
 //    private final ClienteDAO clienteDAO;
 //
@@ -21,14 +25,27 @@ public class ClienteService {
     @Autowired
     private ClienteRepository repository;
 
-    public Cliente cadastroCliente(Cliente _cliente){
-        return repository.save(_cliente);
+    public ClienteDTO cadastroCliente(ClienteDTO _clientedto){
+        Validacao validacao = new Validacao(this);
+        if(!validacao.dtNascMaior18(_clientedto.getDtNasc())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Necessário ser maior de idade.");
+        }
+        if(validacao.emailExistente(_clientedto.getEmail())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email existente.");
+        }
+        if(validacao.cpfExistente(_clientedto.getCpf())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "CPF existente.");
+        }
+        Cliente cliente = repository.save(_clientedto.convertDTOToEntity());
+        
+        return cliente.convertEntityToDTO();
     }
 
     public List<Cliente> listaTodosClientes(){
-
         return repository.findAll();
     }
 
+    public List<Map<String, String>> listaClientePorCpf(String _cpf){ return repository.findClienteByCpf(_cpf); }
 
+    public List<Map<String, String>> listaClientePorEmail(String _email){ return repository.findClienteByEmail(_email); }
 }
