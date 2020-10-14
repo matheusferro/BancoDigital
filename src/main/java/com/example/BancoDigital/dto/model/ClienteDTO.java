@@ -16,6 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
 import java.time.LocalDate;
 
 
@@ -55,6 +56,7 @@ public class ClienteDTO extends RepresentationModel<ClienteDTO> {
 
     @NotNull
     @Temporal(TemporalType.DATE)
+    @Past(message = "Data de nascimento inválida")
     private LocalDate dtNasc;
 
     public Cliente convertDTOToEntity(){
