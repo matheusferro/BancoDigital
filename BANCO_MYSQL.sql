@@ -23,6 +23,16 @@ constraint  CLIENTE_FK_ENDERECO_PK
 foreign key (TB_CLIENTE_ID)
 references TB_CLIENTE(TB_CLIENTE_ID)
 ); 
+
+create table TB_ANEXO(
+TB_ANEXO_ID int auto_increment primary key  not null,
+TB_ANEXO_CAMINHO varchar(255) not null,
+TB_CLIENTE_ID int not null,
+constraint  CLIENTE_FK_ENDERECO_PK
+foreign key (TB_CLIENTE_ID)
+references TB_CLIENTE(TB_CLIENTE_ID)
+); 
  
  select * from tb_cliente; 
  select * from tb_ENDERECO; 
+ delete from tb_endereco where tb_cliente_id = 1;
