@@ -34,15 +34,11 @@ public class EnderecoController {
         }
 
         _enderecodto = service.cadastrarEndereco(_enderecodto);
-        response.setData(_enderecodto);
+//        response.setData(_enderecodto);
 
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
-        headers.add(HttpHeaders.LOCATION, "link");
+        headers.add(HttpHeaders.LOCATION, "/bancoDigital/v1/anexo");
         return new ResponseEntity<>(response, headers, HttpStatus.CREATED);
     }
 
-    @GetMapping(path = "{id}")
-    public List<Map<String, String>> buscarEnderecoDeCliente(@PathVariable("id") String _id){
-        return service.buscarEnderecoPorCliente(_id);
-    }
 }
