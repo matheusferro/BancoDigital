@@ -14,7 +14,7 @@ import java.util.Map;
 
 
 @Service
-public class ClienteService implements ClienteInterface {
+public class ClienteService implements ICliente {
 //
 //    private final ClienteDAO clienteDAO;
 //

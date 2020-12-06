@@ -6,7 +6,7 @@ import com.example.BancoDigital.model.Cliente;
 import java.util.List;
 import java.util.Map;
 
-public interface ClienteInterface {
+public interface ICliente {
 
     ClienteDTO cadastroCliente(ClienteDTO cliente);
 
