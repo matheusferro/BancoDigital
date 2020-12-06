@@ -34,11 +34,16 @@ public class ClienteController {
             return ResponseEntity.badRequest().body(response);
         }
         _clientedto = clienteService.cadastroCliente(_clientedto);
-//        response.setData(_clientedto);
+        response.setData(_clientedto);
 
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
         headers.add(HttpHeaders.LOCATION, "/bancoDigital/v1/endereco");
         return new ResponseEntity<>(response, headers, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public List<Cliente> listaCliente(){
+        return clienteService.listaTodosClientes();
     }
 
 }
