@@ -1,15 +1,15 @@
 package com.example.BancoDigital.dto.model;
 
+import com.example.BancoDigital.annotation.CPFExistente;
+import com.example.BancoDigital.annotation.EmailExistente;
+import com.example.BancoDigital.annotation.MaiorDeIdade;
 import com.example.BancoDigital.model.Cliente;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sun.istack.NotNull;
 import lombok.*;
-import org.apache.tomcat.jni.Local;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 import org.modelmapper.ModelMapper;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.Temporal;
@@ -40,11 +40,13 @@ public class ClienteDTO extends RepresentationModel<ClienteDTO> {
     private String sobrenome;
 
     @NotNull
+    @CPFExistente
     @NotBlank(message="CPF INVÁLIDO.")
     @CPF(message = "CPF INVÁLIDO.")
     private String cpf;
 
     @NotNull
+    @EmailExistente
     @NotBlank(message="EMAIL INVÁLIDO.")
     @Email(message="EMAIL INVÁLIDO.")
     private String email;
@@ -55,6 +57,7 @@ public class ClienteDTO extends RepresentationModel<ClienteDTO> {
     private String cnh;
 
     @NotNull
+    @MaiorDeIdade
     @Temporal(TemporalType.DATE)
     @Past(message = "Data de nascimento inválida")
     private LocalDate dtNasc;

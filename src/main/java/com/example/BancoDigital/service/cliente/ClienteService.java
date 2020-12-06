@@ -27,22 +27,11 @@ public class ClienteService implements ICliente {
 
     public ClienteDTO cadastroCliente(ClienteDTO _clientedto){
         try {
-            Validacao validacao = new Validacao(this);
-            if (!validacao.dtNascMaior18(_clientedto.getDtNasc())) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Necessário ser maior de idade.");
-            }
-            if (validacao.emailExistente(_clientedto.getEmail())) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email existente.");
-            }
-            if (validacao.cpfExistente(_clientedto.getCpf())) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "CPF existente.");
-            }
             Cliente cliente = repository.save(_clientedto.convertDTOToEntity());
-
             return cliente.convertEntityToDTO();
         }catch(Exception error){
             error.printStackTrace();
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ocorreu um erro inesperado. Tente novamente.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "erro.inesperado");
         }
     }
 
@@ -55,7 +44,7 @@ public class ClienteService implements ICliente {
             return repository.findClienteByCpf(_cpf);
         }catch(Exception error){
             error.printStackTrace();
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ocorreu um erro inesperado. Tente novamente.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "erro.inesperado");
         }
     }
 
@@ -64,7 +53,7 @@ public class ClienteService implements ICliente {
             return repository.findClienteByEmail(_email);
         }catch(Exception error){
             error.printStackTrace();
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ocorreu um erro inesperado. Tente novamente.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "erro.inesperado");
         }
     }
 }
