@@ -1,7 +1,6 @@
 package com.example.BancoDigital.annotation;
 
 import com.example.BancoDigital.repository.cliente.ClienteRepository;
-import com.example.BancoDigital.service.cliente.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
@@ -12,7 +11,7 @@ import java.util.Map;
 public class CPFExistenteValidator implements ConstraintValidator<CPFExistente, String> {
 
     @Autowired
-    private ClienteService clienteService;
+    private ClienteRepository repository;
 
     @Override
     public void initialize(CPFExistente constraintAnnotation) {
@@ -21,10 +20,13 @@ public class CPFExistenteValidator implements ConstraintValidator<CPFExistente, 
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
+        if(repository == null){
+            return true;
+        }
         if(value.equals("")  || value == null) {
             return false;
         }
-        List<Map<String, String>> clienteExistente = clienteService.listaClientePorCpf(value);
+        List<Map<String, String>> clienteExistente = repository.findClienteByCpf(value);
         if (clienteExistente.isEmpty()) {
             return true;
         }

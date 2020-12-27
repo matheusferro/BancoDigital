@@ -12,7 +12,7 @@ import java.util.Map;
 public class EmailExistenteValidator implements ConstraintValidator<EmailExistente, String> {
 
     @Autowired
-    private ClienteService clienteService;
+    private ClienteRepository repository;
 
     @Override
     public void initialize(EmailExistente constraintAnnotation) {
@@ -21,10 +21,15 @@ public class EmailExistenteValidator implements ConstraintValidator<EmailExisten
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
+        if(repository == null){
+            return true;
+        }
+
         if(value.equals("")  || value == null) {
             return false;
         }
-        List<Map<String, String>> clienteExistente = clienteService.listaClientePorEmail(value);
+        List<Map<String, String>> clienteExistente = repository.findClienteByEmail(value);
+
         if (clienteExistente.isEmpty()) {
             return true;
         }
