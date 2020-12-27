@@ -29,7 +29,9 @@ import java.util.Date;
 @NoArgsConstructor
 @Table(name = "TB_CLIENTE")
 public class Cliente {
-    @Id @GeneratedValue(strategy= GenerationType.AUTO)
+    @Id
+    @Column(name = "TB_CLIENTE_ID")
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long tbClienteId;
 
     @NotNull
