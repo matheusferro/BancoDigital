@@ -17,7 +17,7 @@ import java.util.Map;
 
 
 @SpringBootTest
-@ActiveProfiles("dev")
+@ActiveProfiles("test")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class})
