@@ -1,4 +1,4 @@
-create database db_banco_digital;
+create database if not exists db_banco_digital;
 use db_banco_digital;
 create table TB_CLIENTE(
 TB_CLIENTE_ID int auto_increment primary key  not null,
