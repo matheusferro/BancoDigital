@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 @SpringBootTest
-@ActiveProfiles("test")
+@ActiveProfiles("dev")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, MockitoTestExecutionListener.class })
@@ -32,7 +32,7 @@ public class ClienteServiceTeste {
     @Autowired
     private ClienteService service;
 
-    @MockBean
+    @Autowired
     private ClienteRepository repository;
 
     @Test
