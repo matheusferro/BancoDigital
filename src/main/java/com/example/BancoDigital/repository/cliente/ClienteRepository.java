@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     static final String FIND_CLI_BY_CPF = "SELECT CLI.TB_CLIENTE_ID AS ID FROM TB_CLIENTE CLI WHERE CLI.TB_CLIENTE_CPF = ?1";
 
